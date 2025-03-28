@@ -1,7 +1,141 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <!-- Hero Section -->
+    <div class="hero-section bg-dark text-white py-5 mb-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fw-bold">Welcome to E-Cinema</h1>
+                    <p class="lead">Your ultimate destination for streaming movies and TV shows.</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search for movies...">
+                        <button class="btn btn-primary" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Movies Section -->
+    <div class="container">
+        <h2 class="mb-4">Featured Movies</h2>
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            <!-- Movie Card 1 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Title 1</h5>
+                        <p class="card-text">Action, Adventure</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">4.5/5</span>
+                            <button class="btn btn-outline-primary">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Movie Card 2 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Title 2</h5>
+                        <p class="card-text">Drama, Romance</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">4.2/5</span>
+                            <button class="btn btn-outline-primary">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Movie Card 3 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Title 3</h5>
+                        <p class="card-text">Comedy, Family</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">4.8/5</span>
+                            <button class="btn btn-outline-primary">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Movie Card 4 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Title 4</h5>
+                        <p class="card-text">Sci-Fi, Thriller</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">4.6/5</span>
+                            <button class="btn btn-outline-primary">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="container mt-5">
+        <h2 class="mb-4">Browse by Category</h2>
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Action</h5>
+                        <p class="card-text">100+ Movies</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Drama</h5>
+                        <p class="card-text">150+ Movies</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Comedy</h5>
+                        <p class="card-text">120+ Movies</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Sci-Fi</h5>
+                        <p class="card-text">80+ Movies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080');
+            background-size: cover;
+            background-position: center;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+}
 
