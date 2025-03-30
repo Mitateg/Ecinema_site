@@ -2,10 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container-fluid">
+<div class="container-fluid p-0">
     <!-- Hero Section -->
     <div class="hero-section bg-dark text-white py-5 mb-4">
-        <div class="container">
+        <div class="container-fluid px-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h1 class="display-4 fw-bold">Welcome to E-Cinema</h1>
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Featured Movies Section -->
-    <div class="container">
+    <div class="container px-4">
         <h2 class="mb-4">Featured Movies</h2>
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
             <!-- Movie Card 1 -->
@@ -83,7 +83,7 @@
     </div>
 
     <!-- Categories Section -->
-    <div class="container mt-5">
+    <div class="container px-4 mt-5">
         <h2 class="mb-4">Browse by Category</h2>
         <div class="row g-3">
             <div class="col-md-3">
@@ -128,13 +128,40 @@
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080');
             background-size: cover;
             background-position: center;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
         }
         .card {
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .card-img-top {
+            height: 450px;
+            object-fit: cover;
+        }
+        .badge {
+            font-size: 0.9rem;
+            padding: 0.5em 0.8em;
+        }
+        .btn-outline-primary {
+            transition: all 0.3s ease;
+        }
+        .btn-outline-primary:hover {
+            transform: translateY(-2px);
+        }
+        @@media (max-width: 768px) {
+            .hero-section {
+                min-height: 40vh;
+            }
+            .card-img-top {
+                height: 350px;
+            }
         }
     </style>
 }
