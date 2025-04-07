@@ -233,7 +233,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ecinema_site.BusinessLogic\Ecinema_site.BusinessLogic.csproj">
+      <Project>{9296ea83-6a90-4438-a88a-d0b8adb3c834}</Project>
+      <Name>Ecinema_site.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ecinema_site.Domain\Ecinema_site.Domain.csproj">
+      <Project>{1a2fcdf9-336a-433b-9a93-064252dcb67f}</Project>
+      <Name>Ecinema_site.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
