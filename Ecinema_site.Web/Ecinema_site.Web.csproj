@@ -117,6 +117,12 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\Logo\Ecinema_logo.png" />
+    <Content Include="Content\Images\Movies\Movie_poster_1.png" />
+    <Content Include="Content\Images\Movies\Movie_poster_2.png" />
+    <Content Include="Content\Images\Movies\Movie_poster_3.png" />
+    <Content Include="Content\Images\Movies\Movie_poster_4.png" />
+    <Content Include="Content\Images\Movies\Movie_poster_5.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -234,9 +240,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\" />
-    <Folder Include="Content\Images\Logo\" />
-    <Folder Include="Content\Images\Movies\" />
-    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
