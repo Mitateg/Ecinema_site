@@ -10,9 +10,11 @@
                 <div class="col-md-6 offset-md-1">
                     <h1 class="display-4 fw-bold">Welcome to E-Cinema</h1>
                     <p class="lead">Your ultimate destination for streaming movies and TV shows.</p>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search for movies...">
-                        <button class="btn btn-primary" type="button">Search</button>
+                    <div class="custom-search-container">
+                        <div class="custom-search">
+                            <input type="text" placeholder="Search for movies...">
+                            <button class="btn btn-primary" type="button">Search</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,7 +34,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Movie Title 1</h5>
+                                <h5 class="card-title">Alien</h5>
                                 <p class="card-text">Action, Adventure</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="badge bg-primary">4.5/5</span>
@@ -52,8 +54,8 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Movie Title 2</h5>
-                                <p class="card-text">Drama, Romance</p>
+                                <h5 class="card-title">Back to the Future</h5>
+                                <p class="card-text">Adventure, Comedy</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="badge bg-primary">4.2/5</span>
                                     <button class="btn btn-outline-primary">Watch Now</button>
@@ -72,8 +74,8 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Movie Title 3</h5>
-                                <p class="card-text">Comedy, Family</p>
+                                <h5 class="card-title">The Goonies</h5>
+                                <p class="card-text">Adventure, Comedy</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="badge bg-primary">4.8/5</span>
                                     <button class="btn btn-outline-primary">Watch Now</button>
@@ -155,23 +157,45 @@
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: left;
         }
         .hero-section .lead {
             font-size: 1.5rem;
             margin-bottom: 2rem;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            text-align: left;
         }
-        .hero-section .input-group {
-            max-width: 1200px;
+        
+        /* Custom Search Box */
+        .custom-search-container {
+            text-align: left;
+            margin-bottom: 20px;
         }
-        .hero-section .input-group .form-control {
-            padding: 1rem;
-            font-size: 1.1rem;
+        
+        .custom-search {
+            display: flex;
+            align-items: center;
+            width: 100%;
         }
-        .hero-section .input-group .btn {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
+        
+        .custom-search input {
+            width: 600px;
+            height: 50px;
+            padding: 0 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px 0 0 25px;
         }
+        
+        .custom-search button {
+            height: 50px;
+            border-radius: 0 25px 25px 0;
+            padding: 0 25px;
+            font-size: 16px;
+            border: none;
+        }
+        
+        /* Card Styles */
         .card {
             transition: transform 0.2s, box-shadow 0.2s;
             border: none;
@@ -197,6 +221,8 @@
         .btn-outline-primary:hover {
             transform: translateY(-2px);
         }
+        
+        /* Responsive Styles */
         @@media (max-width: 768px) {
             .hero-section {
                 min-height: 40vh;
@@ -207,8 +233,8 @@
             .hero-section .lead {
                 font-size: 1.2rem;
             }
-            .hero-section .input-group {
-                max-width: 100%;
+            .custom-search input {
+                width: 100%;
             }
             .card {
                 margin-bottom: 1rem;
