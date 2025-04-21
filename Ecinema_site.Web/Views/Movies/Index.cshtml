@@ -1,7 +1,62 @@
-﻿
+﻿@model List<dynamic>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
+    
+    // Helper function to safely access dynamic properties
+    Func<dynamic, string, object, object> SafeGet = (obj, prop, defaultValue) => {
+        try {
+            var value = obj.GetType().GetProperty(prop) != null ? 
+                obj.GetType().GetProperty(prop).GetValue(obj, null) : defaultValue;
+            return value ?? defaultValue;
+        } catch {
+            return defaultValue;
+        }
+    };
 }
 
-<h2>Movie</h2>
+<div class="container py-5">
+    <h1 class="mb-4">Movies</h1>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @if (Model != null)
+        {
+            foreach (var movie in Model)
+            {
+                string title = SafeGet(movie, "Title", "Movie Title").ToString();
+                string genre = SafeGet(movie, "Genre", "Not specified").ToString();
+                double rating = Convert.ToDouble(SafeGet(movie, "Rating", 0.0));
+                int id = Convert.ToInt32(SafeGet(movie, "Id", 0));
+                string imagePath = SafeGet(movie, "ImagePath", "~/Content/Images/Movies/Movie_poster_1.png").ToString();
+                
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="@Url.Content(imagePath)" class="img-fluid rounded-start h-100" alt="@title">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@title</h5>
+                                    <p class="card-text">@genre</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-primary">@rating/5</span>
+                                        <a href="@Url.Action("Details", "Movies", new { id = id })" class="btn btn-outline-primary">Watch Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info">
+                    No movies available at this time.
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
