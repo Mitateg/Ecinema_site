@@ -1,6 +1,8 @@
 ﻿body {
-    padding-top: 80px;
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -19,13 +21,8 @@ textarea {
 /* Navbar Styles */
 .navbar {
     padding: 1rem 0;
-    height: 80px;
     background-color: #1a1a1a !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     z-index: 1000;
 }
 
@@ -70,7 +67,6 @@ textarea {
     background-size: cover;
     background-position: center;
     padding: 100px 0;
-    margin-top: -80px;
 }
 
 
@@ -136,12 +132,19 @@ textarea {
     transform: translateY(-2px);
 }
 
+/* Main content wrapper */
+main {
+    flex: 1 0 auto;
+    padding-bottom: 2rem;
+}
+
 /* Footer */
 .footer {
+    flex-shrink: 0;
     background-color: #1a1a1a;
     color: #fff;
     padding: 2rem 0;
-    margin-top: 3rem;
+    margin-top: auto;
 }
 
 .footer h5 {
@@ -172,12 +175,19 @@ textarea {
     margin-right: 8px;
 }
 
+/* Sticky footer styles */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    body {
-        padding-top: 60px;
-    }
-
     .navbar {
         height: auto;
         padding: 0.5rem 1rem;
@@ -202,7 +212,6 @@ textarea {
     
     .hero-section {
         padding: 50px 0;
-        margin-top: -60px;
     }
     
     .hero-section h1 {

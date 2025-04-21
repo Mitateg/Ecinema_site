@@ -1,26 +1,90 @@
 @model dynamic
 @{
-    ViewBag.Title = Model != null && ((object)Model).GetType().GetProperty("Title") != null ? Model.Title : "Movie Details";
+    // Set a default title
+    string pageTitle = "Movie Details";
     
     // Helper function to safely access dynamic properties
     Func<dynamic, string, object, object> SafeGet = (obj, prop, defaultValue) => {
         try {
-            var value = obj.GetType().GetProperty(prop) != null ? 
-                obj.GetType().GetProperty(prop).GetValue(obj, null) : defaultValue;
-            return value ?? defaultValue;
-        } catch {
+            if (obj == null) return defaultValue;
+            
+            // For anonymous types - accessing dynamic properties directly
+            try {
+                var value = ((IDictionary<string, object>)obj)[prop];
+                return value ?? defaultValue;
+            }
+            catch {
+                // For standard types with reflection
+                try {
+                    return obj.GetType().GetProperty(prop)?.GetValue(obj) ?? defaultValue;
+                }
+                catch {
+                    // Try direct access as a last resort
+                    try {
+                        // This uses dynamic binding which is what we're trying to be careful with
+                        // But we catch any exceptions from it
+                        var directValue = Microsoft.CSharp.RuntimeBinder.Binder.GetMember(
+                            Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None,
+                            prop,
+                            obj.GetType(),
+                            new[] { Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(
+                                Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None, null) });
+                        return directValue ?? defaultValue;
+                    }
+                    catch {
+                        return defaultValue;
+                    }
+                }
+            }
+        }
+        catch {
             return defaultValue;
         }
     };
     
-    string title = SafeGet(Model, "Title", "Movie Title").ToString();
-    string description = SafeGet(Model, "Description", "No description available.").ToString();
-    string genre = SafeGet(Model, "Genre", "Not specified").ToString();
-    string videoPath = SafeGet(Model, "VideoPath", "").ToString();
-    string imagePath = SafeGet(Model, "ImagePath", "~/Content/Images/Movies/Movie_poster_1.png").ToString();
-    double rating = Convert.ToDouble(SafeGet(Model, "Rating", 0.0));
-    int year = Convert.ToInt32(SafeGet(Model, "Year", 0));
-    int id = Convert.ToInt32(SafeGet(Model, "Id", 0));
+    // Simply try/catch each property access
+    try {
+        if (Model != null && Model.Title != null) {
+            pageTitle = Model.Title;
+        }
+    } catch { /* Use default title */ }
+    
+    ViewBag.Title = pageTitle;
+    
+    // Extract all properties with safer handling
+    string title = "Movie Title";
+    string description = "No description available.";
+    string genre = "Not specified";
+    string videoPath = "";
+    string imagePath = "~/Content/Images/Movies/Movie_poster_1.png";
+    double rating = 0.0;
+    int year = 0;
+    int id = 0;
+    
+    try { if (Model != null) { 
+        title = Model.Title?.ToString() ?? title; 
+    }} catch {}
+    try { if (Model != null) { 
+        description = Model.Description?.ToString() ?? description; 
+    }} catch {}
+    try { if (Model != null) { 
+        genre = Model.Genre?.ToString() ?? genre; 
+    }} catch {}
+    try { if (Model != null) { 
+        videoPath = Model.VideoPath?.ToString() ?? videoPath; 
+    }} catch {}
+    try { if (Model != null) { 
+        imagePath = Model.ImagePath?.ToString() ?? imagePath; 
+    }} catch {}
+    try { if (Model != null && Model.Rating != null) { 
+        rating = Convert.ToDouble(Model.Rating); 
+    }} catch {}
+    try { if (Model != null && Model.Year != null) { 
+        year = Convert.ToInt32(Model.Year); 
+    }} catch {}
+    try { if (Model != null && Model.Id != null) { 
+        id = Convert.ToInt32(Model.Id); 
+    }} catch {}
 }
 
 <div class="container py-4">
