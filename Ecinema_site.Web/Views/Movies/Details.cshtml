@@ -1,90 +1,85 @@
 @model dynamic
 @{
-    // Set a default title
-    string pageTitle = "Movie Details";
+    ViewBag.Title = "Movie Details";
     
-    // Helper function to safely access dynamic properties
-    Func<dynamic, string, object, object> SafeGet = (obj, prop, defaultValue) => {
-        try {
-            if (obj == null) return defaultValue;
-            
-            // For anonymous types - accessing dynamic properties directly
-            try {
-                var value = ((IDictionary<string, object>)obj)[prop];
-                return value ?? defaultValue;
-            }
-            catch {
-                // For standard types with reflection
-                try {
-                    return obj.GetType().GetProperty(prop)?.GetValue(obj) ?? defaultValue;
-                }
-                catch {
-                    // Try direct access as a last resort
-                    try {
-                        // This uses dynamic binding which is what we're trying to be careful with
-                        // But we catch any exceptions from it
-                        var directValue = Microsoft.CSharp.RuntimeBinder.Binder.GetMember(
-                            Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None,
-                            prop,
-                            obj.GetType(),
-                            new[] { Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(
-                                Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None, null) });
-                        return directValue ?? defaultValue;
-                    }
-                    catch {
-                        return defaultValue;
-                    }
-                }
-            }
+    // Get the ID from the route or default to 1
+    int id = 1;
+    try {
+        if (ViewContext.RouteData.Values["id"] != null) {
+            id = Convert.ToInt32(ViewContext.RouteData.Values["id"]);
         }
-        catch {
-            return defaultValue;
-        }
+    } catch { /* Use default id */ }
+
+    // Map of movie titles based on ID
+    var movieTitles = new Dictionary<int, string>
+    {
+        { 1, "Alien" },
+        { 2, "Fight Club" },
+        { 3, "The Goonies" },
+        { 4, "The Shawshank Redemption" },
+        { 5, "Interstellar" }
+    };
+
+    // Map of movie descriptions based on ID
+    var movieDescriptions = new Dictionary<int, string>
+    {
+        { 1, "In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel." },
+        { 2, "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more." },
+        { 3, "A group of young misfits called The Goonies discover an ancient map and set out on an adventure to find a legendary pirate's long-lost treasure." },
+        { 4, "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency." },
+        { 5, "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival." }
+    };
+
+    // Map of movie genres based on ID
+    var movieGenres = new Dictionary<int, string>
+    {
+        { 1, "Action, Adventure, Horror" },
+        { 2, "Drama, Thriller" },
+        { 3, "Adventure, Comedy" },
+        { 4, "Drama" },
+        { 5, "Adventure, Drama, Sci-Fi" }
+    };
+
+    // Map of movie years based on ID
+    var movieYears = new Dictionary<int, int>
+    {
+        { 1, 1979 },
+        { 2, 1999 },
+        { 3, 1985 },
+        { 4, 1994 },
+        { 5, 2014 }
+    };
+
+    // Map of movie ratings based on ID
+    var movieRatings = new Dictionary<int, double>
+    {
+        { 1, 4.5 },
+        { 2, 4.7 },
+        { 3, 4.8 },
+        { 4, 4.9 },
+        { 5, 4.6 }
     };
     
-    // Simply try/catch each property access
-    try {
-        if (Model != null && Model.Title != null) {
-            pageTitle = Model.Title;
+    // Get movie properties
+    string title = movieTitles.ContainsKey(id) ? movieTitles[id] : "Movie Title";
+    string description = movieDescriptions.ContainsKey(id) ? movieDescriptions[id] : "No description available.";
+    string genre = movieGenres.ContainsKey(id) ? movieGenres[id] : "Not specified";
+    int year = movieYears.ContainsKey(id) ? movieYears[id] : 0;
+    double rating = movieRatings.ContainsKey(id) ? movieRatings[id] : 0.0;
+    string imagePath = $"~/Content/Images/Movies/Movie_poster_{id}.png";
+    string videoPath = "~/Content/Videos/sample.mp4";
+    
+    ViewBag.Title = title;
+    
+    // Get two related movies different from the current
+    var relatedIds = new List<int>();
+    for (int i = 1; i <= 5; i++) {
+        if (i != id) {
+            relatedIds.Add(i);
         }
-    } catch { /* Use default title */ }
-    
-    ViewBag.Title = pageTitle;
-    
-    // Extract all properties with safer handling
-    string title = "Movie Title";
-    string description = "No description available.";
-    string genre = "Not specified";
-    string videoPath = "";
-    string imagePath = "~/Content/Images/Movies/Movie_poster_1.png";
-    double rating = 0.0;
-    int year = 0;
-    int id = 0;
-    
-    try { if (Model != null) { 
-        title = Model.Title?.ToString() ?? title; 
-    }} catch {}
-    try { if (Model != null) { 
-        description = Model.Description?.ToString() ?? description; 
-    }} catch {}
-    try { if (Model != null) { 
-        genre = Model.Genre?.ToString() ?? genre; 
-    }} catch {}
-    try { if (Model != null) { 
-        videoPath = Model.VideoPath?.ToString() ?? videoPath; 
-    }} catch {}
-    try { if (Model != null) { 
-        imagePath = Model.ImagePath?.ToString() ?? imagePath; 
-    }} catch {}
-    try { if (Model != null && Model.Rating != null) { 
-        rating = Convert.ToDouble(Model.Rating); 
-    }} catch {}
-    try { if (Model != null && Model.Year != null) { 
-        year = Convert.ToInt32(Model.Year); 
-    }} catch {}
-    try { if (Model != null && Model.Id != null) { 
-        id = Convert.ToInt32(Model.Id); 
-    }} catch {}
+    }
+    // Take only the first two
+    relatedIds = relatedIds.Take(2).ToList();
 }
 
 <div class="container py-4">
@@ -101,17 +96,11 @@
             <!-- Movie Title and Meta Information -->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="mb-0">@title</h1>
-                @if (rating > 0)
-                {
-                    <span class="badge bg-primary fs-5">@rating/5</span>
-                }
+                <span class="badge bg-primary fs-5">@rating/5</span>
             </div>
             
             <div class="mb-4">
-                @if (year > 0)
-                {
-                    <span class="badge bg-secondary me-2">@year</span>
-                }
+                <span class="badge bg-secondary me-2">@year</span>
                 <span class="text-muted">@genre</span>
             </div>
             
@@ -159,42 +148,21 @@
                     <h5 class="mb-0">You May Also Like</h5>
                 </div>
                 <div class="list-group list-group-flush">
-                    @{
-                        // Simple related movies - just display movies other than the current one
-                        int currentId = id;
-                        // Get related movie IDs (1, 2, 3 excluding current)
-                        List<int> relatedIds = new List<int> { 1, 2, 3 };
-                        if (currentId > 0) {
-                            relatedIds.Remove(currentId);
-                        }
-                    }
-                    
-                    @foreach (int relatedId in relatedIds)
+                    @foreach (var relatedId in relatedIds)
                     {
-                        // Get the movie details from the controller in a separate action
-                        // This is simple for now, in a real app you'd have a more sophisticated recommendation system
+                        string relatedTitle = movieTitles.ContainsKey(relatedId) ? movieTitles[relatedId] : "Movie Title";
+                        string relatedGenre = movieGenres.ContainsKey(relatedId) ? movieGenres[relatedId] : "Not specified";
+                        string relatedImagePath = $"~/Content/Images/Movies/Movie_poster_{relatedId}.png";
+                        
                         <a href="@Url.Action("Details", "Movies", new { id = relatedId })" class="list-group-item list-group-item-action">
                             <div class="d-flex align-items-center">
                                 <div class="me-3" style="width: 60px; height: 90px; overflow: hidden;">
-                                    <img src="@Url.Content(String.Format("~/Content/Images/Movies/Movie_poster_{0}.png", relatedId))" 
-                                         class="img-fluid" style="object-fit: cover; height: 100%;" alt="Related Movie">
+                                    <img src="@Url.Content(relatedImagePath)" 
+                                         class="img-fluid" style="object-fit: cover; height: 100%;" alt="@relatedTitle">
                                 </div>
                                 <div>
-                                    @if (relatedId == 1)
-                                    {
-                                        <h6 class="mb-0">Alien</h6>
-                                        <small class="text-muted">Action, Adventure, Horror</small>
-                                    }
-                                    else if (relatedId == 2)
-                                    {
-                                        <h6 class="mb-0">Fight Club</h6>
-                                        <small class="text-muted">Drama, Thriller</small>
-                                    }
-                                    else
-                                    {
-                                        <h6 class="mb-0">The Goonies</h6>
-                                        <small class="text-muted">Adventure, Comedy</small>
-                                    }
+                                    <h6 class="mb-0">@relatedTitle</h6>
+                                    <small class="text-muted">@relatedGenre</small>
                                 </div>
                             </div>
                         </a>
