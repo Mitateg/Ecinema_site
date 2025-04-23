@@ -1,0 +1,148 @@
+@model dynamic
+@{
+    ViewBag.Title = Model != null && ((object)Model).GetType().GetProperty("Title") != null ? Model.Title : "Movie Details";
+    
+    // Helper function to safely access dynamic properties
+    Func<dynamic, string, object, object> SafeGet = (obj, prop, defaultValue) => {
+        try {
+            var value = obj.GetType().GetProperty(prop) != null ? 
+                obj.GetType().GetProperty(prop).GetValue(obj, null) : defaultValue;
+            return value ?? defaultValue;
+        } catch {
+            return defaultValue;
+        }
+    };
+    
+    string title = SafeGet(Model, "Title", "Movie Title").ToString();
+    string description = SafeGet(Model, "Description", "No description available.").ToString();
+    string genre = SafeGet(Model, "Genre", "Not specified").ToString();
+    string videoPath = SafeGet(Model, "VideoPath", "").ToString();
+    string imagePath = SafeGet(Model, "ImagePath", "~/Content/Images/Movies/Movie_poster_1.png").ToString();
+    double rating = Convert.ToDouble(SafeGet(Model, "Rating", 0.0));
+    int year = Convert.ToInt32(SafeGet(Model, "Year", 0));
+    int id = Convert.ToInt32(SafeGet(Model, "Id", 0));
+}
+
+<div class="container py-4">
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <!-- Video Player Box -->
+            <div class="ratio ratio-16x9 mb-4">
+                <video controls class="rounded shadow">
+                    <source src="@Url.Content(videoPath)" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <!-- Movie Title and Meta Information -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="mb-0">@title</h1>
+                @if (rating > 0)
+                {
+                    <span class="badge bg-primary fs-5">@rating/5</span>
+                }
+            </div>
+            
+            <div class="mb-4">
+                @if (year > 0)
+                {
+                    <span class="badge bg-secondary me-2">@year</span>
+                }
+                <span class="text-muted">@genre</span>
+            </div>
+            
+            <!-- Movie Description -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Synopsis</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@description</p>
+                </div>
+            </div>
+            
+            <!-- User Reviews Section (Placeholder) -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">User Reviews</h4>
+                    <button class="btn btn-sm btn-outline-primary">Write a Review</button>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">No reviews yet. Be the first to review this movie!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Movie Poster -->
+            <div class="card mb-4">
+                <img src="@Url.Content(imagePath)" class="card-img-top" alt="@title">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-download"></i> Download
+                        </button>
+                        <button class="btn btn-outline-primary">
+                            <i class="bi bi-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Movies Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">You May Also Like</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    @{
+                        // Simple related movies - just display movies other than the current one
+                        int currentId = id;
+                        // Get related movie IDs (1, 2, 3 excluding current)
+                        List<int> relatedIds = new List<int> { 1, 2, 3 };
+                        if (currentId > 0) {
+                            relatedIds.Remove(currentId);
+                        }
+                    }
+                    
+                    @foreach (int relatedId in relatedIds)
+                    {
+                        // Get the movie details from the controller in a separate action
+                        // This is simple for now, in a real app you'd have a more sophisticated recommendation system
+                        <a href="@Url.Action("Details", "Movies", new { id = relatedId })" class="list-group-item list-group-item-action">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3" style="width: 60px; height: 90px; overflow: hidden;">
+                                    <img src="@Url.Content(String.Format("~/Content/Images/Movies/Movie_poster_{0}.png", relatedId))" 
+                                         class="img-fluid" style="object-fit: cover; height: 100%;" alt="Related Movie">
+                                </div>
+                                <div>
+                                    @if (relatedId == 1)
+                                    {
+                                        <h6 class="mb-0">Alien</h6>
+                                        <small class="text-muted">Action, Adventure, Horror</small>
+                                    }
+                                    else if (relatedId == 2)
+                                    {
+                                        <h6 class="mb-0">Fight Club</h6>
+                                        <small class="text-muted">Drama, Thriller</small>
+                                    }
+                                    else
+                                    {
+                                        <h6 class="mb-0">The Goonies</h6>
+                                        <small class="text-muted">Adventure, Comedy</small>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-between mb-4">
+        <a href="@Url.Action("Index", "Movies")" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Movies
+        </a>
+    </div>
+</div> 
