@@ -233,6 +233,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\" />
+    <Folder Include="Content\Images\Logo\" />
+    <Folder Include="Content\Images\Movies\" />
     <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
