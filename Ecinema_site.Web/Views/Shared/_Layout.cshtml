@@ -1,53 +1,93 @@
 ﻿@using System.Web.Optimization 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Cinema</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        .footer {
+            flex-shrink: 0;
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        .footer a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        .footer ul {
+            padding-left: 0;
+            list-style: none;
+        }
+        .footer li {
+            margin-bottom: 0.5rem;
+        }
+        .navbar {
+            background-color: #212529;
+        }
+    </style>
     @RenderSection("Styles", required: false)
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="~/Content/Images/Logo/Ecinema_logo.png" alt="E-Cinema Logo" height="40" class="d-inline-block align-text-top me-2"> 
-                E-Cinema
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Movies">Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Search">Search</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <button class="btn btn-outline-light me-2">
-                        <a class="nav-link" href="/Search"><i class="bi bi-search"></i></a>
-                    </button>
-                    <button class="btn btn-outline-light">
-                        <a class="nav-link" href="/Login"><i class="bi bi-person"></i></a>
-                    </button>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/Content/Images/Logo/Ecinema_logo.png" alt="E-Cinema Logo" height="40" class="d-inline-block align-text-top me-2"> 
+                    E-Cinema
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Movies")">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Search")">Search</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="@Url.Action("Index", "Search")" class="btn btn-outline-light me-2">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        <a href="@Url.Action("Index", "Login")" class="btn btn-outline-light">
+                            <i class="bi bi-person"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <main role="main">
+    <main role="main" class="flex-grow-1">
         @RenderBody()
     </main>
 
-    <footer class="footer">
+    <footer class="footer mt-auto py-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -56,14 +96,14 @@
                 </div>
                 <div class="col-md-4">
                     <h5>Quick Links</h5>
-                    <ul>
-                        <li><a href="/AboutUs">About Us</a></li>
-                        <li><a href="/Privacy">Privacy Policy</a></li>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("Index", "AboutUs")">About Us</a></li>
+                        <li><a href="@Url.Action("Index", "Privacy")">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Connect With Us</h5>
-                    <ul>
+                    <ul class="list-unstyled">
                         <li><a href="#"><i class="bi bi-facebook"></i> Facebook</a></li>
                         <li><a href="#"><i class="bi bi-twitter"></i> Twitter</a></li>
                         <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>

@@ -5,10 +5,31 @@
     // Helper function to safely access dynamic properties
     Func<dynamic, string, object, object> SafeGet = (obj, prop, defaultValue) => {
         try {
-            var value = obj.GetType().GetProperty(prop) != null ? 
-                obj.GetType().GetProperty(prop).GetValue(obj, null) : defaultValue;
-            return value ?? defaultValue;
-        } catch {
+            if (obj == null) return defaultValue;
+            
+            // For anonymous types - accessing dynamic properties directly
+            try {
+                var value = ((IDictionary<string, object>)obj)[prop];
+                return value ?? defaultValue;
+            }
+            catch {
+                // For standard types with reflection
+                try {
+                    return obj.GetType().GetProperty(prop)?.GetValue(obj) ?? defaultValue;
+                }
+                catch {
+                    try {
+                        // Try direct access as a last resort (with caution)
+                        dynamic val = obj;
+                        return val[prop] ?? defaultValue;
+                    }
+                    catch {
+                        return defaultValue;
+                    }
+                }
+            }
+        }
+        catch {
             return defaultValue;
         }
     };
@@ -22,11 +43,17 @@
         {
             foreach (var movie in Model)
             {
-                string title = SafeGet(movie, "Title", "Movie Title").ToString();
-                string genre = SafeGet(movie, "Genre", "Not specified").ToString();
-                double rating = Convert.ToDouble(SafeGet(movie, "Rating", 0.0));
-                int id = Convert.ToInt32(SafeGet(movie, "Id", 0));
-                string imagePath = SafeGet(movie, "ImagePath", "~/Content/Images/Movies/Movie_poster_1.png").ToString();
+                string title = "";
+                string genre = "";
+                double rating = 0;
+                int id = 0;
+                string imagePath = "~/Content/Images/Movies/Movie_poster_1.png";
+                
+                try { title = movie?.Title?.ToString() ?? "Movie Title"; } catch { title = "Movie Title"; }
+                try { genre = movie?.Genre?.ToString() ?? "Not specified"; } catch { genre = "Not specified"; }
+                try { rating = movie?.Rating != null ? Convert.ToDouble(movie.Rating) : 0.0; } catch { rating = 0.0; }
+                try { id = movie?.Id != null ? Convert.ToInt32(movie.Id) : 0; } catch { id = 0; }
+                try { imagePath = movie?.ImagePath?.ToString() ?? imagePath; } catch { }
                 
                 <div class="col">
                     <div class="card h-100">
