@@ -73,8 +73,6 @@ textarea {
     margin-top: -80px;
 }
 
-.hero-section .container-fluid {
-}
 
 .hero-section h1 {
     font-size: 3.5rem;
@@ -219,8 +217,6 @@ textarea {
         max-width: 90%;
     }
     
-    .card {
-    }
     
     .card:hover {
         transform: translateY(-5px);
