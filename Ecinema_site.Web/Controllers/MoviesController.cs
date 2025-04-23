@@ -40,6 +40,26 @@ namespace Ecinema_site.Web.Controllers
                 Rating = 4.8, 
                 ImagePath = "~/Content/Images/Movies/Movie_poster_3.png", 
                 VideoPath = "~/Content/Videos/sample.mp4" 
+            },
+            new { 
+                Id = 4, 
+                Title = "The Shawshank Redemption", 
+                Description = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", 
+                Year = 1994, 
+                Genre = "Drama", 
+                Rating = 4.9, 
+                ImagePath = "~/Content/Images/Movies/Movie_poster_4.png", 
+                VideoPath = "~/Content/Videos/sample.mp4" 
+            },
+            new { 
+                Id = 5, 
+                Title = "Interstellar", 
+                Description = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", 
+                Year = 2014, 
+                Genre = "Adventure, Drama, Sci-Fi", 
+                Rating = 4.6, 
+                ImagePath = "~/Content/Images/Movies/Movie_poster_5.png", 
+                VideoPath = "~/Content/Videos/sample.mp4" 
             }
         };
 
@@ -49,17 +69,25 @@ namespace Ecinema_site.Web.Controllers
             return View(_movies);
         }
 
-        public ActionResult Details(int id)
+        // GET: /Movies/Details/5
+        public ActionResult Details(int id = 0)
         {
+            // Default to first movie if id is 0
+            if (id == 0) id = 1;
+            
             try
             {
                 // Find the movie with the specified ID
                 var movie = _movies.FirstOrDefault(m => m.Id == id);
                 
-                // If movie not found, return 404
+                // If movie not found, return the first movie as fallback
                 if (movie == null)
                 {
-                    return HttpNotFound();
+                    movie = _movies.FirstOrDefault();
+                    if (movie == null)
+                    {
+                        return HttpNotFound("No movies found");
+                    }
                 }
                 
                 // Pass the movie to the view

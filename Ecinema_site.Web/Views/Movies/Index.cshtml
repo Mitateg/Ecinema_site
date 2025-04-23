@@ -1,89 +1,86 @@
 ﻿@model List<dynamic>
 @{
     ViewBag.Title = "Movies";
-    
-    // Helper function to safely access dynamic properties
-    Func<dynamic, string, object, object> SafeGet = (obj, prop, defaultValue) => {
-        try {
-            if (obj == null) return defaultValue;
-            
-            // For anonymous types - accessing dynamic properties directly
-            try {
-                var value = ((IDictionary<string, object>)obj)[prop];
-                return value ?? defaultValue;
-            }
-            catch {
-                // For standard types with reflection
-                try {
-                    return obj.GetType().GetProperty(prop)?.GetValue(obj) ?? defaultValue;
-                }
-                catch {
-                    try {
-                        // Try direct access as a last resort (with caution)
-                        dynamic val = obj;
-                        return val[prop] ?? defaultValue;
-                    }
-                    catch {
-                        return defaultValue;
-                    }
-                }
-            }
-        }
-        catch {
-            return defaultValue;
-        }
-    };
 }
 
 <div class="container py-5">
     <h1 class="mb-4">Movies</h1>
     
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @if (Model != null)
-        {
-            foreach (var movie in Model)
-            {
-                string title = "";
-                string genre = "";
-                double rating = 0;
-                int id = 0;
-                string imagePath = "~/Content/Images/Movies/Movie_poster_1.png";
-                
-                try { title = movie?.Title?.ToString() ?? "Movie Title"; } catch { title = "Movie Title"; }
-                try { genre = movie?.Genre?.ToString() ?? "Not specified"; } catch { genre = "Not specified"; }
-                try { rating = movie?.Rating != null ? Convert.ToDouble(movie.Rating) : 0.0; } catch { rating = 0.0; }
-                try { id = movie?.Id != null ? Convert.ToInt32(movie.Id) : 0; } catch { id = 0; }
-                try { imagePath = movie?.ImagePath?.ToString() ?? imagePath; } catch { }
-                
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="@Url.Content(imagePath)" class="img-fluid rounded-start h-100" alt="@title">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">@title</h5>
-                                    <p class="card-text">@genre</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="badge bg-primary">@rating/5</span>
-                                        <a href="@Url.Action("Details", "Movies", new { id = id })" class="btn btn-outline-primary">Watch Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Movie 1: Alien -->
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_1.png")" class="card-img-top" alt="Alien">
+                <div class="card-body">
+                    <h5 class="card-title">Alien</h5>
+                    <p class="card-text">Action, Adventure, Horror</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">4.5/5</span>
+                        <a href="@Url.Action("Details", "Movies", new { id = 1 })" class="btn btn-outline-primary">Watch Now</a>
                     </div>
                 </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <div class="alert alert-info">
-                    No movies available at this time.
+            </div>
+        </div>
+
+        <!-- Movie 2: Fight Club -->
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_2.png")" class="card-img-top" alt="Fight Club">
+                <div class="card-body">
+                    <h5 class="card-title">Fight Club</h5>
+                    <p class="card-text">Drama, Thriller</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">4.7/5</span>
+                        <a href="@Url.Action("Details", "Movies", new { id = 2 })" class="btn btn-outline-primary">Watch Now</a>
+                    </div>
                 </div>
             </div>
-        }
+        </div>
+
+        <!-- Movie 3: The Goonies -->
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_3.png")" class="card-img-top" alt="The Goonies">
+                <div class="card-body">
+                    <h5 class="card-title">The Goonies</h5>
+                    <p class="card-text">Adventure, Comedy</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">4.8/5</span>
+                        <a href="@Url.Action("Details", "Movies", new { id = 3 })" class="btn btn-outline-primary">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movie 4: The Shawshank Redemption -->
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_4.png")" class="card-img-top" alt="The Shawshank Redemption">
+                <div class="card-body">
+                    <h5 class="card-title">The Shawshank Redemption</h5>
+                    <p class="card-text">Drama</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">4.9/5</span>
+                        <a href="@Url.Action("Details", "Movies", new { id = 4 })" class="btn btn-outline-primary">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movie 5: Interstellar -->
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_5.png")" class="card-img-top" alt="Interstellar">
+                <div class="card-body">
+                    <h5 class="card-title">Interstellar</h5>
+                    <p class="card-text">Adventure, Drama, Sci-Fi</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">4.6/5</span>
+                        <a href="@Url.Action("Details", "Movies", new { id = 5 })" class="btn btn-outline-primary">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
