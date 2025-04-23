@@ -14,7 +14,7 @@
                         <div class="custom-search">
                             <input type="text" placeholder="Search for movies...">
                             <button class="btn btn-primary" type="button">
-                                <a class="nav-link" href="/Search">Search</a>
+                                <a class="nav-link" href="@Url.Action("Index", "Search")">Search</a>
                             </button>
                         </div>
                     </div>
@@ -25,22 +25,22 @@
 
     <!-- Featured Movies Section -->
     <div class="container px-4">
-        <h2 class="mb-4">Featured Movies</h2>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+        <h2 class="mb-3">Featured Movies</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             <!-- Movie Card 1 -->
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 shadow-sm">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <img src="~/Content/Images/Movies/Movie_poster_1.png" class="img-fluid rounded-start h-100" alt="Movie Poster">
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Alien</h5>
-                                <p class="card-text">Action, Adventure</p>
+                        <div class="col-8">
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Alien</h6>
+                                <p class="card-text small mb-1">Action, Adventure</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="badge bg-primary">4.5/5</span>
-                                    <button class="btn btn-outline-primary">Watch Now</button>
+                                    <a href="@Url.Action("Details", "Movies", new { id = 1 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
                                 </div>
                             </div>
                         </div>
@@ -49,18 +49,18 @@
             </div>
             <!-- Movie Card 2 -->
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 shadow-sm">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <img src="~/Content/Images/Movies/Movie_poster_2.png" class="img-fluid rounded-start h-100" alt="Movie Poster">
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Back to the Future</h5>
-                                <p class="card-text">Adventure, Comedy</p>
+                        <div class="col-8">
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Fight Club</h6>
+                                <p class="card-text small mb-1">Drama, Thriller</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-primary">4.2/5</span>
-                                    <button class="btn btn-outline-primary">Watch Now</button>
+                                    <span class="badge bg-primary">4.7/5</span>
+                                    <a href="@Url.Action("Details", "Movies", new { id = 2 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
                                 </div>
                             </div>
                         </div>
@@ -69,18 +69,38 @@
             </div>
             <!-- Movie Card 3 -->
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 shadow-sm">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <img src="~/Content/Images/Movies/Movie_poster_3.png" class="img-fluid rounded-start h-100" alt="Movie Poster">
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">The Goonies</h5>
-                                <p class="card-text">Adventure, Comedy</p>
+                        <div class="col-8">
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">The Goonies</h6>
+                                <p class="card-text small mb-1">Adventure, Comedy</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="badge bg-primary">4.8/5</span>
-                                    <button class="btn btn-outline-primary">Watch Now</button>
+                                    <a href="@Url.Action("Details", "Movies", new { id = 3 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Movie Card 4 -->
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="~/Content/Images/Movies/Movie_poster_4.png" class="img-fluid rounded-start h-100" alt="Movie Poster">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Shawshank Redemption</h6>
+                                <p class="card-text small mb-1">Drama</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-primary">4.9/5</span>
+                                    <a href="@Url.Action("Details", "Movies", new { id = 4 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
                                 </div>
                             </div>
                         </div>
@@ -91,38 +111,38 @@
     </div>
 
     <!-- Categories Section -->
-    <div class="container px-4 mt-5">
-        <h2 class="mb-4">Browse by Category</h2>
+    <div class="container px-4 mt-4">
+        <h2 class="mb-3">Browse by Category</h2>
         <div class="row g-3">
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="card bg-primary text-white">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Action</h5>
-                        <p class="card-text">100+ Movies</p>
+                    <div class="card-body text-center py-2">
+                        <h5 class="card-title mb-1">Action</h5>
+                        <p class="card-text small">100+ Movies</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="card bg-success text-white">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Drama</h5>
-                        <p class="card-text">150+ Movies</p>
+                    <div class="card-body text-center py-2">
+                        <h5 class="card-title mb-1">Drama</h5>
+                        <p class="card-text small">150+ Movies</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="card bg-info text-white">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Comedy</h5>
-                        <p class="card-text">120+ Movies</p>
+                    <div class="card-body text-center py-2">
+                        <h5 class="card-title mb-1">Comedy</h5>
+                        <p class="card-text small">120+ Movies</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="card bg-warning text-white">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Sci-Fi</h5>
-                        <p class="card-text">80+ Movies</p>
+                    <div class="card-body text-center py-2">
+                        <h5 class="card-title mb-1">Sci-Fi</h5>
+                        <p class="card-text small">80+ Movies</p>
                     </div>
                 </div>
             </div>
@@ -203,19 +223,17 @@
             border: none;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             margin-bottom: 1rem;
-            transform: scale(1.1);
-            transform-origin: center;
         }
         .card:hover {
-            transform: scale(1.1) translateY(-5px);
+            transform: translateY(-5px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .card-body {
-            padding: 1.5rem;
+            padding: 1rem;
         }
         .badge {
-            font-size: 0.9rem;
-            padding: 0.5em 0.8em;
+            font-size: 0.8rem;
+            padding: 0.4em 0.6em;
         }
         .btn-outline-primary {
             transition: all 0.3s ease;
@@ -237,14 +255,6 @@
             }
             .custom-search input {
                 width: 100%;
-            }
-            .card {
-                margin-bottom: 1rem;
-                transform: scale(1);
-                transform-origin: center;
-            }
-            .card:hover {
-                transform: translateY(-5px);
             }
         }
     </style>

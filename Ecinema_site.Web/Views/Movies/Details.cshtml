@@ -82,60 +82,62 @@
     relatedIds = relatedIds.Take(2).ToList();
 }
 
-<div class="container py-4">
-    <div class="row mb-5">
-        <div class="col-md-8">
+<div class="container py-3">
+    <div class="row g-3 mb-4">
+        <div class="col-lg-8">
             <!-- Video Player Box -->
-            <div class="ratio ratio-16x9 mb-4">
-                <video controls class="rounded shadow">
-                    <source src="@Url.Content(videoPath)" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <div class="card shadow-sm">
+                <div class="card-body p-2">
+                    <div class="ratio ratio-16x9">
+                        <video controls class="rounded">
+                            <source src="@Url.Content(videoPath)" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
             </div>
             
             <!-- Movie Title and Meta Information -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="mb-0">@title</h1>
-                <span class="badge bg-primary fs-5">@rating/5</span>
-            </div>
-            
-            <div class="mb-4">
-                <span class="badge bg-secondary me-2">@year</span>
-                <span class="text-muted">@genre</span>
-            </div>
-            
-            <!-- Movie Description -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h4>Synopsis</h4>
-                </div>
+            <div class="card mt-3 shadow-sm">
                 <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0">@title</h4>
+                        <span class="badge bg-primary">@rating/5</span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-secondary me-2">@year</span>
+                        <span class="text-muted">@genre</span>
+                    </div>
+                    
+                    <!-- Movie Description -->
+                    <h5>Synopsis</h5>
                     <p class="card-text">@description</p>
                 </div>
             </div>
             
             <!-- User Reviews Section (Placeholder) -->
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">User Reviews</h4>
+            <div class="card mt-3 shadow-sm">
+                <div class="card-header py-2 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">User Reviews</h5>
                     <button class="btn btn-sm btn-outline-primary">Write a Review</button>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted">No reviews yet. Be the first to review this movie!</p>
+                    <p class="text-muted small">No reviews yet. Be the first to review this movie!</p>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-4">
+        <div class="col-lg-4">
             <!-- Movie Poster -->
-            <div class="card mb-4">
+            <div class="card shadow-sm">
                 <img src="@Url.Content(imagePath)" class="card-img-top" alt="@title">
-                <div class="card-body">
+                <div class="card-body p-2">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-sm btn-primary">
                             <i class="bi bi-download"></i> Download
                         </button>
-                        <button class="btn btn-outline-primary">
+                        <button class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-share"></i> Share
                         </button>
                     </div>
@@ -143,8 +145,8 @@
             </div>
             
             <!-- Related Movies Section -->
-            <div class="card">
-                <div class="card-header">
+            <div class="card mt-3 shadow-sm">
+                <div class="card-header py-2">
                     <h5 class="mb-0">You May Also Like</h5>
                 </div>
                 <div class="list-group list-group-flush">
@@ -154,14 +156,14 @@
                         string relatedGenre = movieGenres.ContainsKey(relatedId) ? movieGenres[relatedId] : "Not specified";
                         string relatedImagePath = $"~/Content/Images/Movies/Movie_poster_{relatedId}.png";
                         
-                        <a href="@Url.Action("Details", "Movies", new { id = relatedId })" class="list-group-item list-group-item-action">
+                        <a href="@Url.Action("Details", "Movies", new { id = relatedId })" class="list-group-item list-group-item-action p-2">
                             <div class="d-flex align-items-center">
-                                <div class="me-3" style="width: 60px; height: 90px; overflow: hidden;">
+                                <div class="me-2" style="width: 50px; height: 75px; overflow: hidden;">
                                     <img src="@Url.Content(relatedImagePath)" 
                                          class="img-fluid" style="object-fit: cover; height: 100%;" alt="@relatedTitle">
                                 </div>
                                 <div>
-                                    <h6 class="mb-0">@relatedTitle</h6>
+                                    <h6 class="mb-0 small">@relatedTitle</h6>
                                     <small class="text-muted">@relatedGenre</small>
                                 </div>
                             </div>
@@ -172,8 +174,8 @@
         </div>
     </div>
     
-    <div class="d-flex justify-content-between mb-4">
-        <a href="@Url.Action("Index", "Movies")" class="btn btn-outline-secondary">
+    <div class="mb-3">
+        <a href="@Url.Action("Index", "Movies")" class="btn btn-sm btn-outline-secondary">
             <i class="bi bi-arrow-left"></i> Back to Movies
         </a>
     </div>
