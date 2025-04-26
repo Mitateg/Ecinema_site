@@ -251,6 +251,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\" />
+    <Folder Include="Content\Videos\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
