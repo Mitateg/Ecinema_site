@@ -67,7 +67,16 @@
     int year = movieYears.ContainsKey(id) ? movieYears[id] : 0;
     double rating = movieRatings.ContainsKey(id) ? movieRatings[id] : 0.0;
     string imagePath = $"~/Content/Images/Movies/Movie_poster_{id}.png";
-    string videoPath = "~/Content/Videos/sample.mp4";
+    string videoPath = "~/Content/Videos/alien.mp4";
+    if (id == 2) {
+        videoPath = "~/Content/Videos/back_to_the_future.mp4";
+    } else if (id == 3) {
+        videoPath = "~/Content/Videos/the_goonies.mp4";
+    } else if (id == 4) {
+        videoPath = "~/Content/Videos/jurassic_park.mp4";
+    } else if (id == 5) {
+        videoPath = "~/Content/Videos/star_wars.mp4";
+    }
     
     ViewBag.Title = title;
     
@@ -89,8 +98,8 @@
             <div class="card shadow-sm">
                 <div class="card-body p-2">
                     <div class="ratio ratio-16x9">
-                        <video controls class="rounded">
-                            <source src="@Url.Content(videoPath)" type="video/mp4">
+                        <video controls width="100%" height="auto">
+                            <source src="@Url.Content(videoPath)" type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </div>

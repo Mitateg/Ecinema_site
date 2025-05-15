@@ -165,11 +165,11 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Content\Videos\Movie_1.mp4" />
-    <Content Include="Content\Videos\Movie_2.mp4" />
-    <Content Include="Content\Videos\Movie_3.mp4" />
-    <Content Include="Content\Videos\Movie_4.mp4" />
-    <Content Include="Content\Videos\Movie_5.mp4" />
+    <Content Include="Content\Videos\alien.mp4" />
+    <Content Include="Content\Videos\back_to_the_future.mp4" />
+    <Content Include="Content\Videos\jurassic_park.mp4" />
+    <Content Include="Content\Videos\star_wars.mp4" />
+    <Content Include="Content\Videos\the_goonies.mp4" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
