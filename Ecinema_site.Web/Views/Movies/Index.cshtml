@@ -1,4 +1,4 @@
-﻿@model List<dynamic>
+﻿@model List<Ecinema_site.Domain.Entities.Movie>
 @{
     ViewBag.Title = "Movies";
 }
@@ -7,80 +7,22 @@
     <h1 class="mb-3">Movies</h1>
     
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
-        <!-- Movie 1: Alien -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_1.png")" class="card-img-top" alt="Alien">
-                <div class="card-body p-2">
-                    <h6 class="card-title mb-1">Alien</h6>
-                    <p class="card-text small mb-1">Action, Adventure, Horror</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary">4.5/5</span>
-                        <a href="@Url.Action("Details", "Movies", new { id = 1 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
+        @foreach (var movie in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="@movie.PosterUrl" class="card-img-top" alt="@movie.Title">
+                    <div class="card-body p-2">
+                        <h6 class="card-title mb-1">@movie.Title</h6>
+                        <p class="card-text small mb-1">@movie.Genre</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">@movie.Rating/5</span>
+                            <a href="@Url.Action("Details", "Movies", new { id = movie.Id })" class="btn btn-sm btn-outline-primary">Watch Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Movie 2: Back to the Future -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_2.png")" class="card-img-top" alt="Back to the Future">
-                <div class="card-body p-2">
-                    <h6 class="card-title mb-1">Back to the Future</h6>
-                    <p class="card-text small mb-1">Sci-Fi, Adventure</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary">4.7/5</span>
-                        <a href="@Url.Action("Details", "Movies", new { id = 2 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Movie 3: The Goonies -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_3.png")" class="card-img-top" alt="The Goonies">
-                <div class="card-body p-2">
-                    <h6 class="card-title mb-1">The Goonies</h6>
-                    <p class="card-text small mb-1">Adventure, Comedy</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary">4.8/5</span>
-                        <a href="@Url.Action("Details", "Movies", new { id = 3 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Movie 4: Jurassic Park -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_4.png")" class="card-img-top" alt="Jurassic Park">
-                <div class="card-body p-2">
-                    <h6 class="card-title mb-1">Jurassic Park</h6>
-                    <p class="card-text small mb-1">Action, Adventure</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary">4.9/5</span>
-                        <a href="@Url.Action("Details", "Movies", new { id = 4 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Movie 5: Star Wars -->
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content("~/Content/Images/Movies/Movie_poster_5.png")" class="card-img-top" alt="Star Wars">
-                <div class="card-body p-2">
-                    <h6 class="card-title mb-1">Star Wars</h6>
-                    <p class="card-text small mb-1">Sci-Fi, Action</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-primary">4.6/5</span>
-                        <a href="@Url.Action("Details", "Movies", new { id = 5 })" class="btn btn-sm btn-outline-primary">Watch Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
