@@ -11,12 +11,10 @@
                     <h1 class="display-4 fw-bold">Welcome to E-Cinema</h1>
                     <p class="lead">Your ultimate destination for streaming movies and TV shows.</p>
                     <div class="custom-search-container">
-                        <div class="custom-search">
-                            <input type="text" placeholder="Search for movies...">
-                            <button class="btn btn-primary" type="button">
-                                <a class="nav-link" href="@Url.Action("Index", "Search")">Search</a>
-                            </button>
-                        </div>
+                        <form class="custom-search" method="get" action="@Url.Action("Index", "Search")">
+                            <input type="text" name="name" placeholder="Search for movies..." class="form-control" style="border-radius: 2rem 0 0 2rem;" />
+                            <button class="btn btn-primary" type="submit" style="border-radius: 0 2rem 2rem 0;">Search</button>
+                        </form>
                     </div>
                 </div>
             </div>

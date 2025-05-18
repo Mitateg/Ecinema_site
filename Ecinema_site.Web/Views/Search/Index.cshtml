@@ -52,3 +52,27 @@
     </div>
 </div>
 
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            var $form = $('form');
+            var $results = $('.row.row-cols-2');
+
+            function submitSearch() {
+                $.get($form.attr('action'), $form.serialize(), function (data) {
+                    var html = $(data).find('.row.row-cols-2').html();
+                    $results.html(html);
+                });
+            }
+
+            $form.on('input', 'input[name="name"]', function () {
+                submitSearch();
+            });
+            $form.on('change', 'input[name="genres"]', function () {
+                submitSearch();
+            });
+        });
+    </script>
+}
+
