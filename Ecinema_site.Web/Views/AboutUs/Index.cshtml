@@ -1,7 +1,69 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "About Us";
 }
 
-<h2>Made by Fuior Vladimir and Aftenii Catalin</h2>
+<style>
+    .about-hero {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: #fff;
+    }
+    .about-card {
+        background: rgba(0,0,0,0.7);
+        border-radius: 1rem;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+    }
+    .about-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        letter-spacing: 1px;
+    }
+    .about-names {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+    .about-email {
+        color: #ffd700;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    .about-github {
+        margin-top: 1.5rem;
+    }
+    .about-github a {
+        color: #61dafb;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 1.1rem;
+    }
+    .about-github a:hover {
+        text-decoration: underline;
+        color: #fff;
+    }
+</style>
+
+<div class="about-hero">
+    <div class="about-card">
+        <div class="about-title">About E-Cinema</div>
+        <div class="about-names">Made by <b>Fuior Vladimir</b> and <b>Afteni Catalin</b></div>
+        <span class="about-email">vladimir.fuior@isa.utm.md</span>
+        <span class="about-email">catalin.afteni@isa.utm.md</span>
+        <div class="about-github">
+            <span>Project GitHub: </span>
+            <a href="https://github.com/Mitateg/Ecinema_site" target="_blank">https://github.com/Mitateg/Ecinema_site</a>
+        </div>
+    </div>
+</div>
 
