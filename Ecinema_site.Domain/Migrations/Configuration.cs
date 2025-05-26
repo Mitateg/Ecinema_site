@@ -85,7 +85,7 @@
                     new Movie
                     {
                         Title = "Interstellar",
-                        Description = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                        Description = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival .",
                         Year = 2014,
                         Genre = "Adventure, Drama, Sci-Fi",
                         Rating = 4.6,
