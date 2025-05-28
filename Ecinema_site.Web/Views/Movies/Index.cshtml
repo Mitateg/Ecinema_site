@@ -3,9 +3,40 @@
     ViewBag.Title = "Movies";
 }
 
-<div class="container py-4">
-    <h1 class="mb-3">Movies</h1>
-    
+<style>
+    body.movies-bg {
+        background: linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.92) 100%),
+            url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+    }
+    .movies-content-box {
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .movies-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+    }
+</style>
+
+<script>
+    // Add a class to the body for this page's background
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('movies-bg');
+    });
+</script>
+
+<div class="movies-content-box">
+    <h1 class="movies-title">Movies</h1>
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">
         @foreach (var movie in Model)
         {
@@ -17,7 +48,14 @@
                         <p class="card-text small mb-1">@movie.Genre</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="badge bg-primary">@movie.Rating/5</span>
-                            <a href="@Url.Action("Details", "Movies", new { id = movie.Id })" class="btn btn-sm btn-outline-primary">Watch Now</a>
+                            @if (Session["IsAppUserLoggedIn"] != null && (bool)Session["IsAppUserLoggedIn"])
+                            {
+                                <a href="@Url.Action("Details", "Movies", new { id = movie.Id })" class="btn btn-sm btn-outline-primary">Watch Now</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index", "Login")" class="btn btn-sm btn-outline-primary">Watch Now</a>
+                            }
                         </div>
                     </div>
                 </div>
