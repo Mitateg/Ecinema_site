@@ -14,15 +14,14 @@ namespace Ecinema_site.Web.App_Start
             var cssBundle = new StyleBundle("~/Content/css");
             cssBundle.Include(
                 "~/Content/bootstrap.min.css",
-                "~/Content/bootstrap-grid.min.css",
-                "~/Content/bootstrap-reboot.min.css",
+                "~/Content/bootstrap-icons.css",
                 "~/Content/Site.css");
             bundles.Add(cssBundle);
 
             // JavaScript Bundles
             var jsBundle = new ScriptBundle("~/Scripts/js");
             jsBundle.Include(
-                "~/Scripts/jquery-3.6.0.min.js",
+                "~/Scripts/jquery-3.7.1.min.js",
                 "~/Scripts/bootstrap.bundle.min.js",
                 "~/Scripts/Site.js");
             bundles.Add(jsBundle);

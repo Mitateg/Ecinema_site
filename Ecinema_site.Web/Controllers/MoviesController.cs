@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Ecinema_site.Domain;
 using Ecinema_site.Domain.Entities;
+using Ecinema_site.BusinessLogic.Interfaces;
 
 namespace Ecinema_site.Web.Controllers
 {
     public class MoviesController : Controller
     {
-        private EcinemaDbContext db = new EcinemaDbContext();
+        private readonly IMovieService _movieService;
+
+        public MoviesController(IMovieService movieService)
+        {
+            _movieService = movieService;
+        }
 
         // GET: Movies
         public ActionResult Index()
         {
-            var movies = db.Movies.ToList();
+            var movies = _movieService.GetAllMovies().ToList();
             return View(movies);
         }
 
@@ -24,12 +29,12 @@ namespace Ecinema_site.Web.Controllers
             if (id == 0)
                 return RedirectToAction("Index");
 
-            var movie = db.Movies.FirstOrDefault(m => m.Id == id);
+            var movie = _movieService.GetMovieById(id);
             if (movie == null)
                 return HttpNotFound("Movie not found");
 
             // Get two related movies (excluding the current one)
-            var relatedMovies = db.Movies.Where(m => m.Id != id).Take(2).ToList();
+            var relatedMovies = _movieService.GetRelatedMovies(id, 2);
             ViewBag.RelatedMovies = relatedMovies;
 
             return View(movie);

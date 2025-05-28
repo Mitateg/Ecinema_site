@@ -58,7 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Interfaces\IMovieRepository.cs" />
+    <Compile Include="Interfaces\IMovieService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MovieRepository.cs" />
+    <Compile Include="Services\MovieService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ecinema_site.Domain\Ecinema_site.Domain.csproj">
