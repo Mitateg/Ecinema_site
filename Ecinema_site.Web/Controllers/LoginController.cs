@@ -31,6 +31,7 @@ namespace Ecinema_site.Web.Controllers
                 var identity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+                Session["IsAppUserLoggedIn"] = true;
                 return RedirectToAction("Profile", "User");
             }
             ViewBag.ErrorMessage = "Invalid username or password.";
@@ -42,7 +43,7 @@ namespace Ecinema_site.Web.Controllers
         {
             var authManager = HttpContext.GetOwinContext().Authentication;
             authManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-
+            Session["IsAppUserLoggedIn"] = null;
             // Clear anti-forgery cookie
             if (Request.Cookies["__RequestVerificationToken"] != null)
             {
@@ -50,7 +51,6 @@ namespace Ecinema_site.Web.Controllers
                 cookie.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(cookie);
             }
-
             return RedirectToAction("Index", "Login");
         }
     }
