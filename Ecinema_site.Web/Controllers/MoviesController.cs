@@ -28,6 +28,10 @@ namespace Ecinema_site.Web.Controllers
             if (movie == null)
                 return HttpNotFound("Movie not found");
 
+            // Get two related movies (excluding the current one)
+            var relatedMovies = db.Movies.Where(m => m.Id != id).Take(2).ToList();
+            ViewBag.RelatedMovies = relatedMovies;
+
             return View(movie);
         }
     }

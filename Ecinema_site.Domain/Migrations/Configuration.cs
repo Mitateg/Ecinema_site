@@ -95,13 +95,14 @@
                 );
             }
 
-            // Always update existing movies to correct titles, genres, and descriptions based on PosterUrl
+            // Always update existing movies to correct titles, genres, descriptions, and video URLs based on PosterUrl
             var movie1 = context.Movies.FirstOrDefault(m => m.PosterUrl == "/Content/Images/Movies/Movie_poster_1.png");
             if (movie1 != null)
             {
                 movie1.Title = "Alien";
                 movie1.Genre = "Action, Adventure, Horror";
                 movie1.Description = "In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel.";
+                movie1.VideoUrl = "/Content/Videos/alien.mp4";
             }
             var movie2 = context.Movies.FirstOrDefault(m => m.PosterUrl == "/Content/Images/Movies/Movie_poster_2.png");
             if (movie2 != null)
@@ -109,6 +110,7 @@
                 movie2.Title = "Back to the Future";
                 movie2.Genre = "Sci-Fi, Adventure";
                 movie2.Description = "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.";
+                movie2.VideoUrl = "/Content/Videos/back_to_the_future.mp4";
             }
             var movie3 = context.Movies.FirstOrDefault(m => m.PosterUrl == "/Content/Images/Movies/Movie_poster_3.png");
             if (movie3 != null)
@@ -116,6 +118,7 @@
                 movie3.Title = "The Goonies";
                 movie3.Genre = "Adventure, Comedy";
                 movie3.Description = "A group of young misfits called The Goonies discover an ancient map and set out on an adventure to find a legendary pirate's long-lost treasure.";
+                movie3.VideoUrl = "/Content/Videos/the_goonies.mp4";
             }
             var movie4 = context.Movies.FirstOrDefault(m => m.PosterUrl == "/Content/Images/Movies/Movie_poster_4.png");
             if (movie4 != null)
@@ -123,6 +126,7 @@
                 movie4.Title = "Jurassic Park";
                 movie4.Genre = "Action, Adventure";
                 movie4.Description = "During a preview tour, a theme park suffers a major power breakdown that allows its cloned dinosaur exhibits to run amok.";
+                movie4.VideoUrl = "/Content/Videos/jurassic_park.mp4";
             }
             var movie5 = context.Movies.FirstOrDefault(m => m.PosterUrl == "/Content/Images/Movies/Movie_poster_5.png");
             if (movie5 != null)
@@ -130,6 +134,7 @@
                 movie5.Title = "Star Wars";
                 movie5.Genre = "Sci-Fi, Action";
                 movie5.Description = "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station.";
+                movie5.VideoUrl = "/Content/Videos/star_wars.mp4";
             }
             context.SaveChanges();
         }
