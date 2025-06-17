@@ -170,6 +170,7 @@
     <Content Include="Content\Images\Movies\Movie_poster_3.png" />
     <Content Include="Content\Images\Movies\Movie_poster_4.png" />
     <Content Include="Content\Images\Movies\Movie_poster_5.png" />
+    <Content Include="Content\Images\Profiles\default-profile.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

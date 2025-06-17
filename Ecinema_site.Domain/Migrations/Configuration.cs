@@ -32,9 +32,20 @@
                 adminUser = new ApplicationUser
                 {
                     UserName = adminEmail,
-                    Email = adminEmail
+                    Email = adminEmail,
+                    FirstName = "John",
+                    LastName = "Smith",
+                    ProfilePicture = "/Content/Images/Profiles/default-profile.png"
                 };
                 userManager.Create(adminUser, "Admin123!");
+            }
+            else
+            {
+                // Update existing admin user
+                adminUser.FirstName = "John";
+                adminUser.LastName = "Smith";
+                adminUser.ProfilePicture = "/Content/Images/Profiles/default-profile.png";
+                userManager.Update(adminUser);
             }
 
             // Seed movies if none exist

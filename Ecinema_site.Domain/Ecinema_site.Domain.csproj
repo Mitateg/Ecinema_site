@@ -65,6 +65,10 @@
     <Compile Include="Migrations\202505251704520_InitialCreate.Designer.cs">
       <DependentUpon>202505251704520_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506171255163_AddUserProfileFields.cs" />
+    <Compile Include="Migrations\202506171255163_AddUserProfileFields.Designer.cs">
+      <DependentUpon>202506171255163_AddUserProfileFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202505251704520_InitialCreate.resx">
       <DependentUpon>202505251704520_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506171255163_AddUserProfileFields.resx">
+      <DependentUpon>202506171255163_AddUserProfileFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
